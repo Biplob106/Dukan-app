@@ -46,10 +46,13 @@
     <!-- jsvectormap -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/jsvectormap@1.5.3/dist/css/jsvectormap.min.css"
         integrity="sha256-+uGLJmmTKOqBr+2E6KDYs/NRsHxSkONXFHUL0fy2O/4=" crossorigin="anonymous" />
+
+    <script src="https://cdn.tailwindcss.com"></script>
+
 </head>
 <!--end::Head-->
 <!--begin::Body-->
 
-<body class="layout-fixed sidebar-expand-lg sidebar-open bg-body-tertiary">
+<body class="layout-fixed sidebar-expand-lg sidebar-open bg-body-tertiary" class="h-full">
     <!--begin::App Wrapper-->
-    <div class="app-wrapper">
+    <div class="app-wrapper" class="min-h-full">
