@@ -1,8 +1,8 @@
 <?php
- require('partials/head.php');
- require('partials/header.php') ;
+ require base_path('views/partials/head.php');
+ require base_path('views/partials/header.php') ;
 
- require('partials/nav.php')
+ require base_path('views/partials/nav.php');
 ?>
 
 <main class="app-main">
@@ -33,7 +33,8 @@
         <div class="container-fluid">
             <!--begin::Row-->
             <div class="row">
-
+                <a href="/product/create">
+                    <span> Create Product</span> </a>
             </div>
             <!-- /.row (main row) -->
         </div>
@@ -42,4 +43,4 @@
     <!--end::App Content-->
 </main>
 
-<?php require('partials/footer.php') ?>
+<?php require base_path('views/partials/footer.php') ?>

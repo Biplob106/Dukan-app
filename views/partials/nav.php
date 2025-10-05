@@ -31,7 +31,7 @@
                     <a href="/product" class="nav-link">
                         <i class="nav-icon bi bi-clipboard-fill"></i>
                         <p>
-                            Layout Options
+                            Product
                             <span class="nav-badge badge text-bg-secondary me-3"></span>
 
                         </p>

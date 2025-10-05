@@ -1,5 +1,5 @@
 <?php
 
-view('product.view.php');
+view('product/product.view.php');
 
 ?>

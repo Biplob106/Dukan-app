@@ -7,3 +7,5 @@ $router->post('/register','registration/store.php');
 $router->get('/login','sessions/create.php');
 $router->post('/sessions','sessions/store.php');
 $router->delete('/sessions','sessions/destroy.php')->only('auth');
+$router->get('/product/create','products/create.php');
+$router->post('/product','products/store.php');
