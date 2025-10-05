@@ -53,6 +53,6 @@ function abort($code = 404)
 }
 function redirect($path){
 
-    header("location z: {$path}");
-    exit();
+    header("location: {$path}");
+    exit;
 }
