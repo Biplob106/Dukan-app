@@ -50,5 +50,5 @@ $user = $db->query('SELECT * FROM users WHERE email = :email', [
 // Log in user
 $_SESSION['user_id'] = $user->id;
 
-header('Location: /');
+header('Location: /login');
 exit;
