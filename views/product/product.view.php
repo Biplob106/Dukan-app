@@ -35,6 +35,45 @@
             <div class="row">
                 <a href="/product/create">
                     <span> Create Product</span> </a>
+
+                <table border="1" cellpadding="10" cellspacing="0"
+                    class="table-auto w-full border-collapse border border-gray-300">
+                    <thead>
+                        <tr class="bg-gray-100">
+                            <th>ID</th>
+                            <th>Name</th>
+                            <th>Size</th>
+                            <th>Description</th>
+                            <th>Price</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php if (!empty($products)): ?>
+                        <?php foreach ($products as $product): ?>
+                        <tr>
+                            <td><?= ($product['id']) ?></td>
+                            <td><?= htmlspecialchars($product['name']) ?></td>
+                            <td><?= ($product['size']) ?></td>
+                            <td><?= htmlspecialchars($product['description']) ?></td>
+                            <td><?= htmlspecialchars($product['price']) ?></td>
+                            <td>
+                                <form class="mt-6" method="POST">
+                                    <input type="hidden" name="_method" value="DELETE">
+                                    <input type="hidden" name="id" value="<?= $product['id'] ?>">
+                                    <button
+                                        class="px-3 py-2 text-xs font-medium text-center text-white bg-red-400 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Delete</button>
+                                </form>
+                            </td>
+                        </tr>
+                        <?php endforeach; ?>
+                        <?php else: ?>
+                        <tr>
+                            <td colspan="7" class="text-center text-gray-500">No products found.</td>
+                        </tr>
+                        <?php endif; ?>
+                    </tbody>
+                </table>
             </div>
             <!-- /.row (main row) -->
         </div>
