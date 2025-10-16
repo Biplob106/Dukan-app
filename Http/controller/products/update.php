@@ -4,26 +4,26 @@ use Core\Database;
 use Core\Validation;
 use Core\App;
 
-// 💾 Get the database instance
+//  Get the database instance
 $db = App::resolve(Database::class);
 
 $errors = [];
 
-// 🧭 Get product ID from POST or GET
+// Get product ID from POST or GET
 $id = $_POST['id'] ?? $_GET['id'] ?? null;
 
 if (!$id) {
     die('Product ID is missing.');
 }
 
-// 🔍 Fetch the existing product
+//  Fetch the existing product
 $product = $db->query("SELECT * FROM products WHERE id = :id", ['id' => $id])->find();
 
 if (!$product) {
     die('Product not found.');
 }
 
-// ✅ Handle form submission
+//  Handle form submission
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && ($_POST['_method'] ?? '') === 'PATCH') {
 
     // 🧹 Sanitize input
@@ -34,7 +34,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && ($_POST['_method'] ?? '') === 'PATC
     $color = trim($_POST['color'] ?? '');
     $material = trim($_POST['material'] ?? '');
 
-    // 🧩 Validate inputs
+    //  Validate inputs
     if (!Validation::string($name, 2, 100)) {
         $errors['name'] = 'Product name is required (2–100 characters).';
     }
@@ -54,7 +54,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && ($_POST['_method'] ?? '') === 'PATC
         $errors['material'] = 'Material must be 2–100 characters long.';
     }
 
-    // ⚠️ If validation fails → reload form with errors
+    //  If validation fails → reload form with errors
     if (!empty($errors)) {
         return view('product/edit.view.php', [
             'heading' => 'Edit Product',
@@ -71,7 +71,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && ($_POST['_method'] ?? '') === 'PATC
         ]);
     }
 
-    // 💾 Update in the database
+    //  Update in the database
     try {
         $db->query(
             "UPDATE products 
@@ -96,14 +96,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && ($_POST['_method'] ?? '') === 'PATC
         die('Database update failed: ' . $e->getMessage());
     }
 
-    // 🔁 Redirect back to product list
+    //  Redirect back to product list
     header('Location: /product');
     exit;
 }
 
-// // 🖋️ Load the edit form
-// view('product/edit.view.php', [
-//     'heading' => 'Edit Product',
-//     'product' => $product,
-//     'errors' => $errors
-// ]);
+//  Load the edit form
+view('product/edit.view.php', [
+    'heading' => 'Edit Product',
+    'product' => $product,
+    'errors' => $errors
+]);
