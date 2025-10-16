@@ -21,8 +21,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $size = trim($_POST['size'] ?? '');
     $description = trim($_POST['description'] ?? '');
     $price = trim($_POST['price'] ?? '');
+    $color = trim($_POST['color'] ?? '');
+    $material = trim ($_POST['material'] ?? '');
 
-    var_dump($name);
+    //var_dump($name);
 
     // ✅ Validate inputs
     if (!Validation::string($name, 2, 100)) {
@@ -40,6 +42,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (!is_numeric($price) || $price <= 0) {
         $errors['price'] = 'Price must be a positive number.';
     }
+     if (!Validation::string($color, 2, 100)) {
+        $errors['color'] = 'Description must be 2–100 characters long.';
+    }
+ if (!Validation::string($material, 2, 100)) {
+        $errors['material'] = 'materials must be 2–100 characters long.';
+    }
+
 
     //  If there are validation errors, return to the form
     if (!empty($errors)) {
@@ -50,20 +59,24 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 'name' => $name,
                 'size' => $size,
                 'description' => $description,
-                'price' => $price
+                'price' => $price,
+                'color'=> $color,
+                'material' => $material
             ]
         ]);
     }
 
     // 💾 Insert into the database
     $db->query(
-        "INSERT INTO products (name, size, description, price)
-         VALUES (:name, :size, :description, :price)",
+        "INSERT INTO products (name, size, description, price, color, material)
+         VALUES (:name, :size, :description, :price , :color, :material)",
         [
             'name' => $name,
             'size' => $size,
             'description' => $description,
             'price' => $price,
+            'color'=> $color,
+            'material' => $material
             
         ]
     );

@@ -62,6 +62,20 @@
 
                         <p class="error"><?= $errors['price'] ?? '' ?></p>
                     </div>
+                    <div class="mb-3">
+                        <label for="exampleInputPassword1" class="form-label">Color</label>
+                        <input type="text" name=" color" value="<?= htmlspecialchars($old['color'] ?? '') ?>"
+                            class="form-control" id="exampleInputPassword1">
+
+                        <p class="error"><?= $errors['color'] ?? '' ?></p>
+                    </div>
+                    <div class="mb-3">
+                        <label for="exampleInputPassword1" class="form-label">Material</label>
+                        <input type="text" name="material" value="<?= htmlspecialchars($old['material'] ?? '') ?>"
+                            class="form-control" id="exampleInputPassword1">
+
+                        <p class="error"><?= $errors['material'] ?? '' ?></p>
+                    </div>
                     <button type="submit" class="btn btn-primary">Submit</button>
                 </form>
             </div>
