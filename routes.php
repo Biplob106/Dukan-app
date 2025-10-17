@@ -15,3 +15,5 @@ $router->patch('/product', 'products/update.php');
 $router->get('/customer', 'customers/index.php');
 $router->get('/customer/create','customers/create.php');
 $router->post('/customer','customers/store.php');
+$router->get('/customer/edit','customers/edit.php');
+$router->patch('/customer','customers/update.php');

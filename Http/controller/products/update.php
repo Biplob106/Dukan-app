@@ -26,7 +26,7 @@ if (!$product) {
 //  Handle form submission
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && ($_POST['_method'] ?? '') === 'PATCH') {
 
-    // 🧹 Sanitize input
+    //  Sanitize input
     $name = trim($_POST['name'] ?? '');
     $size = trim($_POST['size'] ?? '');
     $description = trim($_POST['description'] ?? '');

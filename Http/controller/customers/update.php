@@ -9,7 +9,21 @@ $db = App::resolve(Database::class);
 
 $errors = [];
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+// Get customer ID from POST or GET
+$id = $_POST['id'] ?? $_GET['id'] ?? null;
+
+if (!$id) {
+    die('customer ID is missing.');
+}
+//  Fetch the existing customer
+$customer = $db->query("SELECT * FROM customers WHERE id = :id", ['id' => $id])->find();
+
+if (!$customer) {
+    die('customer not found.');
+}
+
+//  Handle form submission
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && ($_POST['_method'] ?? '') === 'PATCH') {
 
     //  Sanitize input
     $name         = trim($_POST['name'] ?? '');
@@ -51,8 +65,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     //  If there are validation errors, return to the form
     if (! empty($errors)) {
-        return view('customer/create.view.php', [
-            'heading' => 'Create Customer',
+        return view('customer/edit.view.php', [
+            'heading' => 'Edit Customer',
             'errors'  => $errors,
             'old'     => [
                 'name'            => $name,
@@ -62,29 +76,49 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 'total_amount'    => $total_amount,
                 'due_amount'      => $due_amount,
                 'paid_amount'     => $paid_amount,
-                'discount_amount' => $discount_amount,
+                'discount_amount' => $discount_amount
             ],
         ]);
     }
+ //  Update in the database
+    try {
+        $db->query(
+            "UPDATE customers  
+             SET name = :name, 
+                 email = :email, 
+                 phone = :phone, 
+                 address = :address, 
+                 total_amount = :total_amount,
+                 due_amount = :due_amount,
+                 paid_amount = :paid_amount,
+                 discount_amount = :discount_amount
+             WHERE id = :id",
+            [
+                'id' => $id,
+                'name' => $name,
+                'email' => $email,
+                'phone' => $phone,
+                'address' => $address,
+                'total_amount' => $total_amount,
+                'due_amount' => $due_amount,
+                'paid_amount' => $paid_amount,
+                'discount_amount' => $discount_amount
+            ]
+        );
+    } catch (Exception $e) {
+        die('Database update failed: ' . $e->getMessage());
+    }
 
-    //  Insert into the database
-    $db->query(
-        "INSERT INTO customers (name, email, phone,  address,total_amount, due_amount, paid_amount, discount_amount)
-         VALUES (:name, :email, :phone, :address, :total_amount , :due_amount, :paid_amount , :discount_amount)",
-        [
-            'name'            => $name,
-            'email'           => $email,
-            'address'         => $address,
-            'phone'           => $phone,
-            'total_amount'    => $total_amount,
-            'due_amount'      => $due_amount,
-            'paid_amount'     => $paid_amount,
-            'discount_amount' => $discount_amount,
-
-        ]
-    );
-
-    // 🔁 Redirect to product list page
+    //  Redirect back to product list
     header('Location: /customer');
     exit;
 }
+
+   
+
+//  Load the edit form
+view('customer/edit.view.php', [
+    'heading' => 'Edit customer',
+    'customer' => $customer,
+    'errors' => $errors
+]);

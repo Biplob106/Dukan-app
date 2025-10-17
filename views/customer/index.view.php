@@ -13,11 +13,11 @@
             <!--begin::Row-->
             <div class="row">
                 <div class="col-sm-6">
-                    <h3 class="mb-0">Products</h3>
+                    <h3 class="mb-0">Customers</h3>
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-end">
-                        <li class="breadcrumb-item"><a href="#">Home</a></li>
+                        <li class="breadcrumb-item"><a href="/customer">Home</a></li>
                         <li class="breadcrumb-item active" aria-current="page">Customer</li>
                     </ol>
                 </div>
@@ -69,7 +69,7 @@
                                 <!-- Delete Form -->
                                 <form class="inline-block" method="POST">
                                     <input type="hidden" name="_method" value="DELETE">
-                                    <input type="hidden" name="id" value="<?= $product['id'] ?>">
+                                    <input type="hidden" name="id" value="<?= $customer['id'] ?>">
                                     <button
                                         class="px-3 py-2 text-xs font-medium text-center text-white bg-red-500 rounded-lg hover:bg-red-600 focus:ring-4 focus:outline-none focus:ring-red-300 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800">
                                         Delete
@@ -77,7 +77,7 @@
                                 </form>
 
                                 <!-- Update Button -->
-                                <a href="/product/edit?id=<?= $product['id'] ?>"
+                                <a href="/customer/edit?id=<?= $customer['id'] ?>"
                                     class="inline-block px-3 py-2 text-xs font-medium text-center text-white bg-blue-500 rounded-lg hover:bg-blue-600 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
                                     Update
                                 </a>
@@ -87,7 +87,7 @@
                         <?php endforeach; ?>
                         <?php else: ?>
                         <tr>
-                            <td colspan="7" class="text-center text-gray-500">No products found.</td>
+                            <td colspan="7" class="text-center text-gray-500">No customers found.</td>
                         </tr>
                         <?php endif; ?>
                     </tbody>
