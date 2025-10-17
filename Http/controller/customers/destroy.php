@@ -8,12 +8,12 @@ $db= App::resolve(Database::class);
 
 
 
-    $product = $db->query('select * from products where id = :id', [
+    $customer = $db->query('select * from customers where id = :id', [
     'id' => $_POST['id']])->findOrFail();
 
-    $db->query('delete from products where id = :id', [
+    $db->query('delete from customers where id = :id', [
         'id' => $_POST['id']
     ]);
 
-    header('location: /product');
+    header('location: /customer');
     exit;
