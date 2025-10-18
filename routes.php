@@ -19,3 +19,6 @@ $router->get('/customer/edit','customers/edit.php');
 $router->patch('/customer','customers/update.php');
 $router->delete('/customer','customers/destroy.php');
 $router->get('/image', 'images/index.php');
+$router->get('/order', 'orders/index.php');
+$router->get('/order/create', 'orders/create.php');
+$router->post('/order','orders/store.php');

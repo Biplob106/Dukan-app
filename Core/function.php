@@ -56,3 +56,22 @@ function redirect($path){
     header("location: {$path}");
     exit;
 }
+
+
+if (!function_exists('generateInvoiceNumber')) {
+    function generateInvoiceNumber($db)
+    {
+        do {
+            $invoiceNumber = 'INV-' . date('Ymd') . '-' . rand(1000, 9999);
+
+            $result = $db->query(
+                "SELECT COUNT(*) AS count FROM orders WHERE invoice_number = :invoice",
+                ['invoice' => $invoiceNumber]
+            )->find();
+
+            $count = $result['count'] ?? 0;
+        } while ($count > 0);
+
+        return $invoiceNumber;
+    }
+}
