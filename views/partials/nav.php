@@ -38,6 +38,16 @@
                     </a>
                 </li>
                 <li class="nav-item">
+                    <a href="/image" class="nav-link">
+                        <i class="nav-icon bi bi-clipboard-fill"></i>
+                        <p>
+                            Images
+                            <span class="nav-badge badge text-bg-secondary me-3"></span>
+
+                        </p>
+                    </a>
+                </li>
+                <li class="nav-item">
                     <a href="/customer" class="nav-link">
                         <i class="nav-icon bi bi-clipboard-fill"></i>
                         <p>

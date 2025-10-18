@@ -96,6 +96,47 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && ($_POST['_method'] ?? '') === 'PATC
         die('Database update failed: ' . $e->getMessage());
     }
 
+    if (!empty($_POST['remove_images'])) {
+    foreach ($_POST['remove_images'] as $imgId) {
+        $img = $db->query("SELECT * FROM images WHERE id = :id", ['id' => $imgId])->find();
+        if ($img) {
+            $filePath = base_path('public' . $img['url']);
+            if (file_exists($filePath)) {
+                unlink($filePath); // delete file
+            }
+            $db->query("DELETE FROM images WHERE id = :id", ['id' => $imgId]);
+        }
+    }
+}
+// Handle multiple image uploads
+if (!empty($_FILES['images']['name'][0])) {
+    $uploadDir = base_path('public/uploads/products/');
+    if (!is_dir($uploadDir)) {
+        mkdir($uploadDir, 0755, true); // safer than 0777
+    }
+
+    foreach ($_FILES['images']['tmp_name'] as $key => $tmp_name) {
+        $originalName = basename($_FILES['images']['name'][$key]);
+        $tmpFile = $_FILES['images']['tmp_name'][$key];
+        $fileExt = pathinfo($originalName, PATHINFO_EXTENSION);
+        $uniqueName = uniqid('img_', true) . '.' . $fileExt;
+        $targetPath = $uploadDir . $uniqueName;
+
+        if (move_uploaded_file($tmpFile, $targetPath)) {
+            $imagePathForDB = '/uploads/products/' . $uniqueName;
+
+            // Save image path to images table linked to product
+            $db->query(
+                "INSERT INTO images (product_id, url) VALUES (:product_id, :url)",
+                [
+                    'product_id' => $id,
+                    'url' => $imagePathForDB
+                ]
+            );
+        }
+    }
+}
+
     //  Redirect back to product list
     header('Location: /product');
     exit;

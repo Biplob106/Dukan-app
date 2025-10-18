@@ -33,7 +33,7 @@
         <div class="container-fluid">
             <!--begin::Row-->
             <div class="row">
-                <form method="POST" action="/product">
+                <form method="POST" action="/product" enctype="multipart/form-data">
                     <div class="mb-3">
                         <label for="exampleInputEmail1" class="form-label">Name</label>
                         <input type="text" name="name" value="<?= htmlspecialchars($old['name'] ?? '') ?>"
@@ -76,6 +76,15 @@
 
                         <p class="error"><?= $errors['material'] ?? '' ?></p>
                     </div>
+                    <!--  Multiple image upload field -->
+                    <div class="mb-3">
+                        <label for="images" class="form-label">Product Images</label>
+                        <input type="file" id="images" class="form-control" multiple accept="image/*" name="images[]">
+                        <div id="preview" class="mt-3 d-flex flex-wrap gap-2"></div>
+                    </div>
+
+                    <!-- Hidden file inputs container -->
+                    <div id="hidden-files"></div>
                     <button type="submit" class="btn btn-primary">Submit</button>
                 </form>
             </div>
@@ -85,5 +94,6 @@
     </div>
     <!--end::App Content-->
 </main>
+
 
 <?php require base_path('views/partials/footer.php') ?>

@@ -18,3 +18,4 @@ $router->post('/customer','customers/store.php');
 $router->get('/customer/edit','customers/edit.php');
 $router->patch('/customer','customers/update.php');
 $router->delete('/customer','customers/destroy.php');
+$router->get('/image', 'images/index.php');

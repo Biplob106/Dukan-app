@@ -45,6 +45,7 @@
                             <th>Size</th>
                             <th>Description</th>
                             <th>Price</th>
+                            <th>Product Images</th>
                             <th></th>
                         </tr>
                     </thead>
@@ -57,6 +58,19 @@
                             <td><?= ($product['size']) ?></td>
                             <td><?= htmlspecialchars($product['description']) ?></td>
                             <td><?= htmlspecialchars($product['price']) ?></td>
+                           <td>
+<div class="d-flex flex-wrap gap-1">
+                        <?php if (!empty($product['images'])): ?>
+                            <?php foreach ($product['images'] as $img): ?>
+                                <img src="<?= htmlspecialchars($img['url']) ?>" 
+                                     height="100" width="100" 
+                                     style="object-fit:cover; border:1px solid #ccc; border-radius:4px;">
+                            <?php endforeach; ?>
+                        <?php else: ?>
+                            <span>No images</span>
+                        <?php endif; ?>
+                    </div>
+</td>
                             <td class="space-x-2">
                                 <!-- Delete Form -->
                                 <form class="inline-block" method="POST">
