@@ -24,3 +24,4 @@ $router->get('/order/create', 'orders/create.php');
 $router->post('/order','orders/store.php');
 $router->get('/order/edit','orders/edit.php');
 $router->patch('/order/update','orders/update.php');
+$router->delete('/order','orders/destroy.php');
