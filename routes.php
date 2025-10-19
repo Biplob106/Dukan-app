@@ -22,3 +22,5 @@ $router->get('/image', 'images/index.php');
 $router->get('/order', 'orders/index.php');
 $router->get('/order/create', 'orders/create.php');
 $router->post('/order','orders/store.php');
+$router->get('/order/edit','orders/edit.php');
+$router->patch('/order/update','orders/update.php');

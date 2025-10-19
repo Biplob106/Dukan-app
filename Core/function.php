@@ -58,20 +58,20 @@ function redirect($path){
 }
 
 
-if (!function_exists('generateInvoiceNumber')) {
-    function generateInvoiceNumber($db)
-    {
-        do {
-            $invoiceNumber = 'INV-' . date('Ymd') . '-' . rand(1000, 9999);
+      
+    if(!function_exists('generateInvoiceNumber'))
+        {
+            function generateInvoiceNumber($db)
+            {
 
-            $result = $db->query(
-                "SELECT COUNT(*) AS count FROM orders WHERE invoice_number = :invoice",
-                ['invoice' => $invoiceNumber]
-            )->find();
+                do{
+                $invoiceNumber = 'INV' . date('Ymd') . '-' . rand(1000, 9999);
+                $result = $db->query(" SELECT COUNT(*) AS count FROM orders WHERE invoice_number = :invoice",['invoice' => $invoiceNumber])->find();
+                $count = $result['count'] ?? 0;
 
-            $count = $result['count'] ?? 0;
-        } while ($count > 0);
+            }
+            while($count > 0);
 
-        return $invoiceNumber;
+            return $invoiceNumber;
+            }
     }
-}

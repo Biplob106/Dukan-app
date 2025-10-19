@@ -86,7 +86,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       exit;
         
 } catch (Throwable $e) {
-    echo "<pre style='color:red'>❌ Database Error: " . htmlspecialchars($e->getMessage()) . "</pre>";
+    echo "<pre style='color:red'> Database Error: " . htmlspecialchars($e->getMessage()) . "</pre>";
     die;
 }
 }
