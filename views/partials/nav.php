@@ -67,6 +67,16 @@
                         </p>
                     </a>
                 </li>
+                <li class="nav-item">
+                    <a href="/employee" class="nav-link">
+                        <i class="nav-icon bi bi-clipboard-fill"></i>
+                        <p>
+                            Employees
+                            <span class="nav-badge badge text-bg-secondary me-3"></span>
+
+                        </p>
+                    </a>
+                </li>
             </ul>
             <!--end::Sidebar Menu-->
         </nav>

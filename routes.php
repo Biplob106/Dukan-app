@@ -25,3 +25,6 @@ $router->post('/order','orders/store.php');
 $router->get('/order/edit','orders/edit.php');
 $router->patch('/order/update','orders/update.php');
 $router->delete('/order','orders/destroy.php');
+$router->get('/employee','employees/index.php');
+$router->get('/employee/create','employees/create.php');
+$router->post('/employee','employees/store.php');
