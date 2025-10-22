@@ -31,5 +31,9 @@ $router->post('/employee','employees/store.php');
 $router->get('/employee/edit','employees/edit.php');
 $router->patch('/employee', 'employees/update.php');
 $router->delete('/employee','employees/destroy.php');
+$router->get('/attendance','attendances/index.php');
+$router->get('/attendance/create','attendances/create.php');
+$router->post('/attendance','attendances/store.php');
+
 
 
