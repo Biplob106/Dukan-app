@@ -34,6 +34,12 @@ $router->delete('/employee','employees/destroy.php');
 $router->get('/attendance','attendances/index.php');
 $router->get('/attendance/create','attendances/create.php');
 $router->post('/attendance','attendances/store.php');
+$router->get('/advance_salary','advance_salaries/index.php');
+$router->get('/advance_salary/create','advance_salaries/create.php');
+$router->post('/advance_salary','advance_salaries/store.php');
+
+
+
 
 
 

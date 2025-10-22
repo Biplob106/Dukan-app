@@ -87,6 +87,16 @@
                         </p>
                     </a>
                 </li>
+                <li class="nav-item">
+                    <a href="/advance_salary" class="nav-link">
+                        <i class="nav-icon bi bi-clipboard-fill"></i>
+                        <p>
+                            Advance Salary
+                            <span class="nav-badge badge text-bg-secondary me-3"></span>
+
+                        </p>
+                    </a>
+                </li>
             </ul>
             <!--end::Sidebar Menu-->
         </nav>
