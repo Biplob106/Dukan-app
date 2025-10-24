@@ -13,9 +13,11 @@ $errors = [];
 
 $invoice_number = generateInvoiceNumber($db);
 $customers = $db->query("SELECT id, name FROM customers")->fetchAll();
+$products = $db->query("SELECT * FROM products")->fetchAll();
 
 view('order/create.view.php', [
     'customers' => $customers,
+    'products' => $products,
     'invoice_number' => $invoice_number,
     'old' => $_POST ?? [],
     'errors' => $errors ?? []

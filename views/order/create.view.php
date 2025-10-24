@@ -35,17 +35,6 @@
             <div class="row">
               <form method="POST" action="/order">
     <div class="mb-3">
-    <label class="form-label">Invoice Number</label>
-    <input
-        name="invoice_number"
-        value="<?= htmlspecialchars($old['invoice_number'] ?? $invoice_number ?? '') ?>"
-        class="form-control"
-        readonly
-    >
-    <p class="error"><?= $errors['invoice_number'] ?? '' ?></p>
-</div>
-
-    <div class="mb-3">
         <label class="form-label">Customer</label>
         <select name="customer_id" class="form-control">
             <option value="">-- Select Customer --</option>
@@ -57,25 +46,23 @@
         </select>
         <p class="error"><?= $errors['customer_id'] ?? '' ?></p>
     </div>
-
     <div class="mb-3">
-        <label class="form-label">Sub Total</label>
-        <input type="number" step="0.01" name="sub_total" value="<?= htmlspecialchars($old['sub_total'] ?? '') ?>" class="form-control">
-        <p class="error"><?= $errors['sub_total'] ?? '' ?></p>
+        <label class="form-label">Product</label>
+        <select name="product_id" class="form-control">
+            <option value="">-- Select Product --</option>
+            <?php foreach ($products as $product): ?>
+                <option value="<?= $product['id'] ?>" <?= (isset($old['product_id']) && $old['product_id'] == $product['id']) ? 'selected' : '' ?>>
+                    <?= htmlspecialchars($product['name']) ?>
+                </option>
+            <?php endforeach; ?>
+        </select>
+        <p class="error"><?= $errors['customer_id'] ?? '' ?></p>
     </div>
-
     <div class="mb-3">
         <label class="form-label">Discount</label>
         <input type="number" step="0.01" name="discount" value="<?= htmlspecialchars($old['discount'] ?? 0) ?>" class="form-control">
         <p class="error"><?= $errors['discount'] ?? '' ?></p>
     </div>
-
-    <div class="mb-3">
-        <label class="form-label">Grand Total</label>
-        <input type="number" step="0.01" name="grand_total" value="<?= htmlspecialchars($old['grand_total'] ?? '') ?>" class="form-control" readonly>
-        <p class="error"><?= $errors['grand_total'] ?? '' ?></p>
-    </div>
-
     <div class="mb-3">
         <label class="form-label">Delivery Date</label>
         <input type="date" name="delivery_date" value="<?= htmlspecialchars($old['delivery_date'] ?? '') ?>" class="form-control">
