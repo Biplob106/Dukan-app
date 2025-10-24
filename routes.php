@@ -37,6 +37,11 @@ $router->post('/attendance','attendances/store.php');
 $router->get('/advance_salary','advance_salaries/index.php');
 $router->get('/advance_salary/create','advance_salaries/create.php');
 $router->post('/advance_salary','advance_salaries/store.php');
+$router->get('/transaction','transactions/index.php');
+$router->get('/transaction/create','transactions/create.php');
+$router->post('/transaction','transactions/store.php');
+
+
 
 
 
