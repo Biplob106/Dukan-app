@@ -35,7 +35,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && ($_POST['_method'] ?? '') === 'PATC
     $due_amount  = trim($_POST['due_amount'] ?? '');
     $discount_amount = trim($_POST['discount_amount'] ?? '');
     //var_dump($name);
-    // ✅ Validate inputs
+    //  Validate inputs
     if (! Validation::string($name, 2, 100)) {
         $errors['name'] = 'Product name is required (2–100 characters).';
     }

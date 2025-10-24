@@ -40,6 +40,9 @@ $router->post('/advance_salary','advance_salaries/store.php');
 $router->get('/transaction','transactions/index.php');
 $router->get('/transaction/create','transactions/create.php');
 $router->post('/transaction','transactions/store.php');
+$router->get('/transaction/edit' ,'transactions/edit.php');
+$router->patch('/transaction' ,'transactions/update.php');
+
 
 
 
