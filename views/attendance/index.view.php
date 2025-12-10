@@ -13,12 +13,12 @@
             <!--begin::Row-->
             <div class="row">
                 <div class="col-sm-6">
-                    <h3 class="mb-0">Employee</h3>
+                    <h3 class="mb-0">Attendance</h3>
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-end">
                         <li class="breadcrumb-item"><a href="/employee">Home</a></li>
-                        <li class="breadcrumb-item active" aria-current="page">Employee</li>
+                        <li class="breadcrumb-item active" aria-current="page">Attendance</li>
                     </ol>
                 </div>
             </div>
@@ -101,7 +101,7 @@
                                 </form>
 
                                 <!-- Update Button -->
-                                <a href="/employee/edit?id=<?= $attendance['id'] ?>"
+                                <a href="/attendance/edit?id=<?= $attendance['id'] ?>"
                                     class="inline-block px-3 py-2 text-xs font-medium text-center text-white bg-blue-500 rounded-lg hover:bg-blue-600 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
                                     Update
                                 </a>
