@@ -9,6 +9,9 @@ $db = App::resolve(Database::class);
 
 $errors = [];
 
+//dected ajax request
+$isAjax = !empty($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) === 'xmlhttprequest';
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     //  Sanitize input
@@ -51,6 +54,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     //  If there are validation errors, return to the form
     if (! empty($errors)) {
+
+        if ($isAjax) {
+            header('Content-Type: application/json');
+            echo json_encode(['errors' => $errors]);
+            exit;
+        }else {
         return view('customer/create.view.php', [
             'heading' => 'Create Customer',
             'errors'  => $errors,
@@ -66,6 +75,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             ],
         ]);
     }
+}
 
     //  Insert into the database
     $db->query(
@@ -84,7 +94,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         ]
     );
 
+$customerId = $db->lastInsertId();
+
     // 🔁 Redirect to product list page
+    if($isAjax) {
+        header('Content-Type: application/json');
+        echo json_encode([
+            'success' => true
+            ,'customer_id' => $customerId,
+            'name' => $name
+        ]);
+        exit;
+    }else {
     header('Location: /customer');
     exit;
+}
 }
