@@ -13,6 +13,7 @@ $db = App::resolve(Database::class);
 
 $errors = [];
 
+$isAjax = !empty($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) === 'xmlhttprequest';
 
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -53,6 +54,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     
     //  If there are validation errors, return to the form
     if (!empty($errors)) {
+
+        if ($isAjax) {
+            header('Content-Type: application/json');
+            echo json_encode(['errors' => $errors]);
+            exit;
+        } else {
         return view('product/create.view.php', [
             'heading' => 'Create Product',
             'errors' => $errors,
@@ -66,6 +73,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 ]
             ]);
         }
+    }
         
         //  Insert into the database
         $query = $db->query(
@@ -119,6 +127,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
     // Redirect to product list page
+
+    if ($isAjax) {
+        header('Content-Type: application/json');
+        echo json_encode([
+            'success' => true,
+            'product_id' => $productId,
+        ]);
+        exit;
+    }else {
     header('Location: /product');
-    exit;
+    exit;}
 }

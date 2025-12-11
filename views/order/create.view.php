@@ -274,12 +274,30 @@
                         <input type="text" class="form-control" id="product_name" name="name" required placeholder="Enter product name">
                     </div>
                     <div class="mb-3">
+                        <label for="product_size" class="form-label fw-bold">Size</label>
+                        <input type="text" class="form-control" id="product_size" name="size" placeholder="Enter size">
+                    </div>
+                    <div class="mb-3">
                         <label for="product_price" class="form-label fw-bold">Price</label>
                         <input type="number" step="0.01" class="form-control" id="product_price" name="price" placeholder="0.00">
                     </div>
                     <div class="mb-3">
+                        <label for="product_color" class="form-label fw-bold">Color</label>
+                        <input type="text" class="form-control" id="product_color" name="color" placeholder="Enter color">
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="product_material" class="form-label fw-bold">Material</label>
+                        <input type="text" class="form-control" id="product_material" name="material" placeholder="Enter material">
+                    </div>
+
+                    <div class="mb-3">
                         <label for="product_description" class="form-label fw-bold">Description</label>
                         <textarea class="form-control" id="product_description" name="description" rows="2" placeholder="Enter product description"></textarea>
+                    </div>
+                    <div class="mb-3">
+                        <label for="product_images" class="form-label fw-bold">Images</label>
+                        <input type="file" class="form-control" id="product_images" name="images[]" multiple>
                     </div>
                     <div id="productFormError" class="alert alert-danger d-none">
                         <i class="bi bi-exclamation-triangle-fill me-2"></i>
@@ -368,15 +386,19 @@ document.getElementById('saveProductBtn').addEventListener('click', function() {
     this.disabled = true;
     this.innerHTML = '<span class="spinner-border spinner-border-sm me-1"></span>Saving...';
 
-    fetch('create_product.php', {
+    fetch('/product', {
         method: 'POST',
-        body: formData
+        body: formData,
+        headers: {
+            'X-Requested-With': 'XMLHttpRequest' // Indicate AJAX request
+        }
+
     })
     .then(response => response.json())
     .then(data => {
         if (data.success) {
             const select = document.getElementById('product_id');
-            const option = new Option(data.product.name, data.product.id, true, true);
+            const option = new Option(data.name, data.product_id, true, true);
             select.add(option);
 
             const modal = bootstrap.Modal.getInstance(document.getElementById('addProductModal'));
@@ -385,9 +407,18 @@ document.getElementById('saveProductBtn').addEventListener('click', function() {
 
             showToast('Product added successfully!', 'success');
         } else {
+            if(data.errors){
+                let messages = [];
+                for (const key in data.errors) {
+                    messages.push(data.errors[key]);
+                }
+                errorText.innerHTML = messages.join('<br>');
+            }
+            else{
             errorText.textContent = data.message || 'Failed to create product';
-            errorDiv.classList.remove('d-none');
         }
+        errorDiv.classList.remove('d-none');
+    }
     })
     .catch(error => {
         errorText.textContent = 'An error occurred. Please try again.';
