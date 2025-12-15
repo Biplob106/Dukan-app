@@ -21,8 +21,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $address      = trim($_POST['address'] ?? '');
     $total_amount = trim($_POST['total_amount'] ?? '');
     $paid_amount = trim($_POST['paid_amount'] ?? '');
-    $due_amount  = trim($_POST['due_amount'] ?? '');
     $discount_amount = trim($_POST['discount_amount'] ?? '');
+    $due_amount  = $total_amount - ($paid_amount+$discount_amount);
     //var_dump($name);
     // ✅ Validate inputs
     if (! Validation::string($name, 2, 100)) {

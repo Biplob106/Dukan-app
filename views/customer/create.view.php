@@ -67,7 +67,7 @@
                         <label for="exampleInputPassword1" class="form-label">Total Amount</label>
                         <input type="number" step="0.01" name="total_amount"
                             value="<?= htmlspecialchars($old['total_amount'] ?? '') ?>" class="form-control"
-                            id="exampleInputPassword1">
+                            id="total_amount">
 
                         <p class="error"><?= $errors['total_amount'] ?? '' ?></p>
                     </div>
@@ -75,7 +75,7 @@
                         <label for="exampleInputPassword1" class="form-label">Due Amount</label>
                         <input type="number" step="0.01" name="due_amount"
                             value="<?= htmlspecialchars($old['due_amount'] ?? '') ?>" class="form-control"
-                            id="exampleInputPassword1">
+                            id="due_amount" readonly>
 
                         <p class="error"><?= $errors['due_amount'] ?? '' ?></p>
                     </div>
@@ -83,7 +83,7 @@
                         <label for="exampleInputPassword1" class="form-label">Paid Amount</label>
                         <input type="number" step="0.01" name="paid_amount"
                             value="<?= htmlspecialchars($old['paid_amount'] ?? '') ?>" class="form-control"
-                            id="exampleInputPassword1">
+                            id="paid_amount">
 
                         <p class="error"><?= $errors['paid_amount'] ?? '' ?></p>
                     </div>
@@ -91,7 +91,7 @@
                         <label for="exampleInputPassword1" class="form-label">Discount Amount</label>
                         <input type="number" step="0.01" name="discount_amount"
                             value="<?= htmlspecialchars($old['discount_amount'] ?? '') ?>" class="form-control"
-                            id="exampleInputPassword1">
+                            id="discount_amount">
 
                         <p class="error"><?= $errors['discount_amount'] ?? '' ?></p>
                     </div>
@@ -107,3 +107,16 @@
 </main>
 
 <?php require base_path('views/partials/footer.php') ?>
+<script>
+    function calculateaDue(){
+        let total = parseFloat(document.getElementById("total_amount").value) || 0 ;
+        let paid = parseFloat(document.getElementById("paid_amount").value) || 0;
+        let  dicount = parseFloat(document.getElementById("discount_amount").value)||0;
+        let due = total-paid-discount;
+        document.getElementById("due_amount").value = due.toFixed(2);
+
+    }
+    document.getElementById("total_amount").addEventListener("input",calculateaDue);
+    document.getElementById("paid_amount").addEventListener("input",calculateaDue);
+    document.getElementById("discount_amount").addEevenListener("input",calculateaDue);
+</script>
