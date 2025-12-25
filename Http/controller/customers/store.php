@@ -26,7 +26,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     //var_dump($name);
     // ✅ Validate inputs
     if (! Validation::string($name, 2, 100)) {
-        $errors['name'] = 'Product name is required (2–100 characters).';
+        $errors['name'] = 'Customer name is required (2–100 characters).';
     }
 
 // Phone (optional, digits only, 7–15 characters)

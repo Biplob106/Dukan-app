@@ -63,39 +63,6 @@
 
                     </div>
 
-                    <div class="mb-3">
-                        <label for="exampleInputPassword1" class="form-label">Total Amount</label>
-                        <input type="number" step="0.01" name="total_amount"
-                            value="<?= htmlspecialchars($old['total_amount'] ?? '') ?>" class="form-control"
-                            id="total_amount">
-
-                        <p class="error"><?= $errors['total_amount'] ?? '' ?></p>
-                    </div>
-                    <div class="mb-3">
-                        <label for="exampleInputPassword1" class="form-label">Due Amount</label>
-                        <input type="number" step="0.01" name="due_amount"
-                            value="<?= htmlspecialchars($old['due_amount'] ?? '') ?>" class="form-control"
-                            id="due_amount" readonly>
-
-                        <p class="error"><?= $errors['due_amount'] ?? '' ?></p>
-                    </div>
-                    <div class="mb-3">
-                        <label for="exampleInputPassword1" class="form-label">Paid Amount</label>
-                        <input type="number" step="0.01" name="paid_amount"
-                            value="<?= htmlspecialchars($old['paid_amount'] ?? '') ?>" class="form-control"
-                            id="paid_amount">
-
-                        <p class="error"><?= $errors['paid_amount'] ?? '' ?></p>
-                    </div>
-                    <div class="mb-3">
-                        <label for="exampleInputPassword1" class="form-label">Discount Amount</label>
-                        <input type="number" step="0.01" name="discount_amount"
-                            value="<?= htmlspecialchars($old['discount_amount'] ?? '') ?>" class="form-control"
-                            id="discount_amount">
-
-                        <p class="error"><?= $errors['discount_amount'] ?? '' ?></p>
-                    </div>
-
                     <button type="submit" class="btn btn-primary">Submit</button>
                 </form>
             </div>
